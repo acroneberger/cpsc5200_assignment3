@@ -20,6 +20,8 @@ These verbs can be combined in the command string in any length or order. Transf
 `"horz gray resize1000x1000"`
 will be interpreted as flip the image horizontally, convert that image to grayscale, and resize that output to 1000x1000 pixels.
 
+Content types: `/api/create-formula` and `/api/update-formula` both expect data to be sent with the content type `application/json`. `/api/process-image` expects image data to be sent with the content type `multipart/form-data`. All endpoints except for `api/process-image` return JSON responses, while `api/process-image` returns image data with the content type set to the MIME type of the image format. At present the only MIME type used on return is `image/jpeg`.
+
 The following are all valid endpoints for interacting with the API:
 
 #### /api/create-formula (POST)
@@ -36,6 +38,16 @@ Returns
 ```
 {"Success":"8784b499-8681-4f47-8daf-ecc90bf27a52"}
 ```
+
+```
+curl --header "Content-Type: application/json" \
+--request PUT \
+--data '{"format":"jpeg", "commands":"horz gray resize1000x1000"}' \
+http://localhost:5000/update-formula/8784b499-8681-4f47-8daf-ecc90bf27a52
+```
+will update the existing formula stored at that guid to the new data sent. If successful, returns:
+```
+{"Success": "Updated 8784b499-8681-4f47-8daf-ecc90bf27a52"}
 
 #### /api/get-formula{guid} (GET)
 Retrieve the formula stored for a given guid. Returns JSON with `{Error: Not Found}` if the resource is not located.
