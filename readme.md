@@ -39,6 +39,13 @@ Returns
 {"Success":"8784b499-8681-4f47-8daf-ecc90bf27a52"}
 ```
 
+
+
+
+#### /api/get-formula{guid} (GET)
+Retrieve the formula stored for a given guid. Returns JSON with `{Error: Not Found}` if the resource is not located.
+#### /api/update-formula/{guid} (PUT) 
+Update the formula stored for a given guid. Takes the same JSON payload format as `create-formula`. If the guid is not found, returns JSON with `{Error: Not Found}`. There is no support for partial updates--whatever transformation data is in the commands will replace the existing data.
 ```
 curl --header "Content-Type: application/json" \
 --request PUT \
@@ -48,11 +55,6 @@ http://localhost:5000/update-formula/8784b499-8681-4f47-8daf-ecc90bf27a52
 will update the existing formula stored at that guid to the new data sent. If successful, returns:
 ```
 {"Success": "Updated 8784b499-8681-4f47-8daf-ecc90bf27a52"}
-
-#### /api/get-formula{guid} (GET)
-Retrieve the formula stored for a given guid. Returns JSON with `{Error: Not Found}` if the resource is not located.
-#### /api/update-formula/{guid} (PUT) 
-Update the formula stored for a given guid. Takes the same JSON payload format as `create-formula`. If the guid is not found, returns JSON with `{Error: Not Found}`. There is no support for partial updates--whatever transformation data is in the commands
 #### /api/remove-formula/{guid} (DELETE)
 Remove a formula (and the given guid). If the guid is successfully deleted, returns a `{Success': 'Deleted {guid}}` JSON message. If not round returns a `{Error: Not Found}` response.
 #### /api/process-image/{guid} (POST)
