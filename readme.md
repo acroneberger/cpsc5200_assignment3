@@ -55,6 +55,7 @@ http://localhost:5000/update-formula/8784b499-8681-4f47-8daf-ecc90bf27a52
 will update the existing formula stored at that guid to the new data sent. If successful, returns:
 ```
 {"Success": "Updated 8784b499-8681-4f47-8daf-ecc90bf27a52"}
+```
 #### /api/remove-formula/{guid} (DELETE)
 Remove a formula (and the given guid). If the guid is successfully deleted, returns a `{Success': 'Deleted {guid}}` JSON message. If not round returns a `{Error: Not Found}` response.
 #### /api/process-image/{guid} (POST)
